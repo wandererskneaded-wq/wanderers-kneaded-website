@@ -10,6 +10,26 @@ function ensureDesignCredit() {
   footer.insertBefore(credit, footer.querySelector("a"));
 }
 
+function ensureGalleryNavAndProofButton() {
+  const nav = document.querySelector(".nav");
+  if (nav && !nav.querySelector('a[href="#instagram"]')) {
+    const link = document.createElement("a");
+    link.href = "#instagram";
+    link.textContent = "Gallery";
+    const whyLink = nav.querySelector('a[href="#why"]');
+    nav.insertBefore(link, whyLink || null);
+  }
+
+  const proofHeading = document.querySelector("#proof .section-heading");
+  if (proofHeading && !proofHeading.querySelector(".proof-gallery-link")) {
+    const button = document.createElement("a");
+    button.className = "button primary proof-gallery-link";
+    button.href = "#instagram";
+    button.textContent = "View gallery";
+    proofHeading.appendChild(button);
+  }
+}
+
 function ensureInstagramSection() {
   if (!data.instagram || document.querySelector("#instagram")) return;
 
@@ -36,8 +56,18 @@ function ensureInstagramSection() {
     <div class="instagram-grid" id="instagramGrid" aria-label="Trailer, food and event gallery"></div>
   `;
 
+  const proof = document.querySelector("#proof");
   const footer = document.querySelector(".site-footer");
-  document.body.insertBefore(section, footer);
+  if (proof) proof.insertAdjacentElement("afterend", section);
+  else document.body.insertBefore(section, footer);
+}
+
+function placeGalleryNearProof() {
+  const gallery = document.querySelector("#instagram");
+  const proof = document.querySelector("#proof");
+  if (gallery && proof && proof.nextElementSibling !== gallery) {
+    proof.insertAdjacentElement("afterend", gallery);
+  }
 }
 
 function parseTime(value, now = new Date()) {
@@ -163,8 +193,10 @@ function enableReveal() {
 }
 
 ensureInstagramSection();
+ensureGalleryNavAndProofButton();
 ensureDesignCredit();
 renderCollections();
+placeGalleryNearProof();
 renderLiveStatus();
 enableReveal();
 setHeaderState();

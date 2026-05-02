@@ -12,27 +12,29 @@ function ensureDesignCredit() {
 
 function ensureGalleryNavAndProofButton() {
   const nav = document.querySelector(".nav");
-  if (nav && !nav.querySelector('a[href="#instagram"]')) {
-    const link = document.createElement("a");
-    link.href = "#instagram";
-    link.textContent = "Gallery";
+  if (nav && !nav.querySelector('a[href="#gallery"]')) {
+    const galleryLink = document.createElement("a");
+    galleryLink.href = "#gallery";
+    galleryLink.textContent = "Gallery";
+    const instagramLink = document.createElement("a");
+    instagramLink.href = "#instagram";
+    instagramLink.textContent = "Instagram";
     const whyLink = nav.querySelector('a[href="#why"]');
-    nav.insertBefore(link, whyLink || null);
+    nav.insertBefore(galleryLink, whyLink || null);
+    nav.insertBefore(instagramLink, whyLink || null);
   }
 
   const proofHeading = document.querySelector("#proof .section-heading");
   if (proofHeading && !proofHeading.querySelector(".proof-gallery-link")) {
     const button = document.createElement("a");
     button.className = "button primary proof-gallery-link";
-    button.href = "#instagram";
+    button.href = "#gallery";
     button.textContent = "View gallery";
     proofHeading.appendChild(button);
   }
 }
 
-function ensureInstagramSection() {
-  if (!data.instagram || document.querySelector("#instagram")) return;
-
+function ensureGalleryAndInstagramSections() {
   if (!document.querySelector('link[href="instagram.css"]')) {
     const link = document.createElement("link");
     link.rel = "stylesheet";
@@ -40,33 +42,46 @@ function ensureInstagramSection() {
     document.head.appendChild(link);
   }
 
-  const section = document.createElement("section");
-  section.id = "instagram";
-  section.className = "section instagram-section";
-  section.innerHTML = `
-    <div class="section-kicker">Gallery</div>
-    <div class="instagram-head">
-      <div>
-        <h2>Trailers, food and where the fire has travelled.</h2>
-        <p>Use simple filenames in <code>assets/gallery</code>: trailer images as <code>t1.jpg</code>, <code>t2.jpg</code>, <code>t3.jpg</code>; food as <code>f1.jpg</code>, <code>f2.jpg</code>; places and past events as <code>p1.jpg</code>, <code>p2.jpg</code>. The page will show these once the files are uploaded.</p>
-      </div>
-      <a class="button primary" href="https://www.instagram.com/wandererskneaded/" target="_blank" rel="noreferrer">Open Instagram</a>
-    </div>
-    <div class="instagram-live-slot" id="instagramLiveSlot" aria-label="Live Instagram feed area"></div>
-    <div class="instagram-grid" id="instagramGrid" aria-label="Trailer, food and event gallery"></div>
-  `;
-
   const proof = document.querySelector("#proof");
   const footer = document.querySelector(".site-footer");
-  if (proof) proof.insertAdjacentElement("afterend", section);
-  else document.body.insertBefore(section, footer);
-}
 
-function placeGalleryNearProof() {
-  const gallery = document.querySelector("#instagram");
-  const proof = document.querySelector("#proof");
-  if (gallery && proof && proof.nextElementSibling !== gallery) {
-    proof.insertAdjacentElement("afterend", gallery);
+  if (data.gallery && !document.querySelector("#gallery")) {
+    const gallery = document.createElement("section");
+    gallery.id = "gallery";
+    gallery.className = "section gallery-section";
+    gallery.innerHTML = `
+      <div class="section-kicker">Gallery</div>
+      <div class="gallery-head">
+        <div>
+          <h2>Trailers, food and where the fire has travelled.</h2>
+          <p>Use simple filenames in <code>assets/gallery</code>: trailer images as <code>t1.jpg</code>, <code>t2.jpg</code>, <code>t3.jpg</code>; food as <code>f1.jpg</code>, <code>f2.jpg</code>; places and past events as <code>p1.jpg</code>, <code>p2.jpg</code>. The page will show these once the files are uploaded.</p>
+        </div>
+        <a class="button primary" href="#quote">Ask about trailer hire</a>
+      </div>
+      <div class="gallery-grid" id="galleryGrid" aria-label="Trailer, food and event gallery"></div>
+    `;
+    if (proof) proof.insertAdjacentElement("afterend", gallery);
+    else document.body.insertBefore(gallery, footer);
+  }
+
+  if (data.instagram && !document.querySelector("#instagram")) {
+    const instagram = document.createElement("section");
+    instagram.id = "instagram";
+    instagram.className = "section instagram-section";
+    instagram.innerHTML = `
+      <div class="section-kicker">Instagram Feed</div>
+      <div class="instagram-head">
+        <div>
+          <h2>Live from @wandererskneaded.</h2>
+          <p>This area is reserved for the live Instagram feed. Paste a widget embed or API-powered feed markup into <code>site-data.js</code> under <code>instagram.widgetHtml</code>.</p>
+        </div>
+        <a class="button primary" href="https://www.instagram.com/wandererskneaded/" target="_blank" rel="noreferrer">Open Instagram</a>
+      </div>
+      <div class="instagram-live-slot" id="instagramLiveSlot" aria-label="Live Instagram feed area"></div>
+    `;
+    const gallery = document.querySelector("#gallery");
+    if (gallery) gallery.insertAdjacentElement("afterend", instagram);
+    else document.body.insertBefore(instagram, footer);
   }
 }
 
@@ -157,24 +172,24 @@ function renderCollections() {
   const menu = $("#menuGrid");
   data.menu.forEach((item) => menu.appendChild(card(`<span>${item.label}</span><h3>${item.name}</h3><p>${item.ingredients}</p>`)));
 
-  const instagramSlot = $("#instagramLiveSlot");
-  if (instagramSlot && data.instagram) {
-    instagramSlot.innerHTML = data.instagram.widgetHtml.trim()
-      ? data.instagram.widgetHtml
-      : `<strong>${data.instagram.handle}</strong><span>Upload named images into <code>assets/gallery</code> or paste a live Instagram widget in <code>site-data.js</code>.</span>`;
-    instagramSlot.classList.toggle("has-widget", Boolean(data.instagram.widgetHtml.trim()));
-  }
-
-  const instagramGrid = $("#instagramGrid");
-  if (instagramGrid && data.instagram) {
-    data.instagram.posts.forEach((post) => {
+  const galleryGrid = $("#galleryGrid");
+  if (galleryGrid && data.gallery) {
+    data.gallery.items.forEach((post) => {
       const item = document.createElement("a");
       item.href = "https://www.instagram.com/wandererskneaded/";
       item.target = "_blank";
       item.rel = "noreferrer";
       item.innerHTML = `<img src="${post.image}" alt="${post.title}" loading="lazy" onerror="this.onerror=null;this.src='${post.fallback}'"><span><small>${post.category} / ${post.code}</small>${post.title}</span>`;
-      instagramGrid.appendChild(item);
+      galleryGrid.appendChild(item);
     });
+  }
+
+  const instagramSlot = $("#instagramLiveSlot");
+  if (instagramSlot && data.instagram) {
+    instagramSlot.innerHTML = data.instagram.widgetHtml.trim()
+      ? data.instagram.widgetHtml
+      : `<strong>${data.instagram.handle}</strong><span>${data.instagram.fallbackText} Paste it into <code>site-data.js</code>.</span>`;
+    instagramSlot.classList.toggle("has-widget", Boolean(data.instagram.widgetHtml.trim()));
   }
 }
 
@@ -192,11 +207,10 @@ function enableReveal() {
   document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
 }
 
-ensureInstagramSection();
+ensureGalleryAndInstagramSections();
 ensureGalleryNavAndProofButton();
 ensureDesignCredit();
 renderCollections();
-placeGalleryNearProof();
 renderLiveStatus();
 enableReveal();
 setHeaderState();

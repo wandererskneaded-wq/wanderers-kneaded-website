@@ -1,6 +1,15 @@
 const data = window.WK_SITE_DATA;
 const $ = (selector) => document.querySelector(selector);
 
+function ensureDesignCredit() {
+  const footer = document.querySelector(".site-footer");
+  if (!footer || footer.querySelector(".design-credit")) return;
+  const credit = document.createElement("p");
+  credit.className = "design-credit";
+  credit.textContent = "Created and designed by Pete Patel.";
+  footer.insertBefore(credit, footer.querySelector("a"));
+}
+
 function ensureInstagramSection() {
   if (!data.instagram || document.querySelector("#instagram")) return;
 
@@ -15,16 +24,16 @@ function ensureInstagramSection() {
   section.id = "instagram";
   section.className = "section instagram-section";
   section.innerHTML = `
-    <div class="section-kicker">Fresh from Instagram</div>
+    <div class="section-kicker">Gallery</div>
     <div class="instagram-head">
       <div>
-        <h2>Follow the van, the queues and the fire.</h2>
-        <p>Drop a live Instagram widget into the slot below when the account token or embed code is ready. Until then, this gallery keeps the page lively with real Wanderers Kneaded visuals and a direct route to Instagram.</p>
+        <h2>Trailers, food and where the fire has travelled.</h2>
+        <p>Use simple filenames in <code>assets/gallery</code>: trailer images as <code>t1.jpg</code>, <code>t2.jpg</code>, <code>t3.jpg</code>; food as <code>f1.jpg</code>, <code>f2.jpg</code>; places and past events as <code>p1.jpg</code>, <code>p2.jpg</code>. The page will show these once the files are uploaded.</p>
       </div>
       <a class="button primary" href="https://www.instagram.com/wandererskneaded/" target="_blank" rel="noreferrer">Open Instagram</a>
     </div>
     <div class="instagram-live-slot" id="instagramLiveSlot" aria-label="Live Instagram feed area"></div>
-    <div class="instagram-grid" id="instagramGrid" aria-label="Instagram gallery fallback"></div>
+    <div class="instagram-grid" id="instagramGrid" aria-label="Trailer, food and event gallery"></div>
   `;
 
   const footer = document.querySelector(".site-footer");
@@ -52,7 +61,6 @@ function getStatus() {
   const open = parseTime(data.today.open, now);
   const close = parseTime(data.today.close, now);
   const trading = data.today.isTradingToday;
-
   if (!trading) return { open: false, label: "Not trading today", timer: "Check Instagram for pop-ups", next: "Paused" };
   if (now < open) return { open: false, label: "Opens today", timer: `Opens in ${formatDuration(open - now)}`, next: formatDuration(open - now) };
   if (now >= open && now < close) return { open: true, label: "Open now", timer: `Closes in ${formatDuration(close - now)}`, next: formatDuration(close - now) };
@@ -121,12 +129,10 @@ function renderCollections() {
 
   const instagramSlot = $("#instagramLiveSlot");
   if (instagramSlot && data.instagram) {
-    if (data.instagram.widgetHtml.trim()) {
-      instagramSlot.innerHTML = data.instagram.widgetHtml;
-      instagramSlot.classList.add("has-widget");
-    } else {
-      instagramSlot.innerHTML = `<strong>${data.instagram.handle}</strong><span>Live feed ready: paste your widget embed in <code>site-data.js</code>.</span>`;
-    }
+    instagramSlot.innerHTML = data.instagram.widgetHtml.trim()
+      ? data.instagram.widgetHtml
+      : `<strong>${data.instagram.handle}</strong><span>Upload named images into <code>assets/gallery</code> or paste a live Instagram widget in <code>site-data.js</code>.</span>`;
+    instagramSlot.classList.toggle("has-widget", Boolean(data.instagram.widgetHtml.trim()));
   }
 
   const instagramGrid = $("#instagramGrid");
@@ -136,7 +142,7 @@ function renderCollections() {
       item.href = "https://www.instagram.com/wandererskneaded/";
       item.target = "_blank";
       item.rel = "noreferrer";
-      item.innerHTML = `<img src="${post.image}" alt="${post.title}" loading="lazy"><span>${post.title}</span>`;
+      item.innerHTML = `<img src="${post.image}" alt="${post.title}" loading="lazy" onerror="this.onerror=null;this.src='${post.fallback}'"><span><small>${post.category} / ${post.code}</small>${post.title}</span>`;
       instagramGrid.appendChild(item);
     });
   }
@@ -157,6 +163,7 @@ function enableReveal() {
 }
 
 ensureInstagramSection();
+ensureDesignCredit();
 renderCollections();
 renderLiveStatus();
 enableReveal();

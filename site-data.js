@@ -54,17 +54,19 @@ window.WK_SITE_DATA = {
     handle: "@wandererskneaded",
     widgetHtml: "",
     posts: [
-      { title: "Wood-fired lunch rush", image: "https://static.wixstatic.com/media/e9cf4f_18c6102c66164272b39fcd4a5d675958~mv2.jpg/v1/crop/x_0,y_271,w_1440,h_898/fill/w_624,h_389,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/284041799_5764117473604961_6597428100485549405_n.jpg" },
-      { title: "Pizza van service", image: "https://static.wixstatic.com/media/e9cf4f_760335b489ba43b496e1bcb25a2e0f3d~mv2.jpg/v1/crop/x_29,y_0,w_1098,h_1445/fill/w_417,h_549,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/18366104149024333.jpg" },
-      { title: "Fresh from the oven", image: "https://static.wixstatic.com/media/e9cf4f_4136c70a397f4d228226acfad5478673~mv2.webp/v1/fill/w_322,h_186,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/e9cf4f_4136c70a397f4d228226acfad5478673~mv2.webp" },
-      { title: "Meadows regulars", image: "https://static.wixstatic.com/media/e9cf4f_191bd95ab8bc4ad2aa331d47328528e6~mv2.webp/v1/fill/w_284,h_186,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/e9cf4f_191bd95ab8bc4ad2aa331d47328528e6~mv2.webp" },
-      { title: "Street food setup", image: "https://static.wixstatic.com/media/e9cf4f_07e8feea18054f4998226d27956ba966~mv2.jpg/v1/fill/w_114,h_114,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/e9cf4f_07e8feea18054f4998226d27956ba966~mv2.jpg" },
-      { title: "Pizza by the slice", image: "https://static.wixstatic.com/media/e9cf4f_20ed6a40bc6943ed820fcc5c50f5cbb0~mv2.jpg/v1/fill/w_112,h_149,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/e9cf4f_20ed6a40bc6943ed820fcc5cbb0~mv2.jpg" }
+      { category: "Trailers to rent", code: "t1", title: "Trailer one", image: "assets/gallery/t1.jpg", fallback: "https://static.wixstatic.com/media/e9cf4f_760335b489ba43b496e1bcb25a2e0f3d~mv2.jpg/v1/crop/x_29,y_0,w_1098,h_1445/fill/w_417,h_549,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/18366104149024333.jpg" },
+      { category: "Trailers to rent", code: "t2", title: "Trailer two", image: "assets/gallery/t2.jpg", fallback: "https://static.wixstatic.com/media/e9cf4f_18c6102c66164272b39fcd4a5d675958~mv2.jpg/v1/crop/x_0,y_271,w_1440,h_898/fill/w_624,h_389,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/284041799_5764117473604961_6597428100485549405_n.jpg" },
+      { category: "Trailers to rent", code: "t3", title: "Trailer three", image: "assets/gallery/t3.jpg", fallback: "https://static.wixstatic.com/media/e9cf4f_07e8feea18054f4998226d27956ba966~mv2.jpg/v1/fill/w_114,h_114,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/e9cf4f_07e8feea18054f4998226d27956ba966~mv2.jpg" },
+      { category: "Food", code: "f1", title: "Wood-fired pizza", image: "assets/gallery/f1.jpg", fallback: "https://static.wixstatic.com/media/e9cf4f_4136c70a397f4d228226acfad5478673~mv2.webp/v1/fill/w_322,h_186,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/e9cf4f_4136c70a397f4d228226acfad5478673~mv2.webp" },
+      { category: "Food", code: "f2", title: "Pizza by the slice", image: "assets/gallery/f2.jpg", fallback: "https://static.wixstatic.com/media/e9cf4f_20ed6a40bc6943ed820fcc5c50f5cbb0~mv2.jpg/v1/fill/w_112,h_149,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/e9cf4f_20ed6a40bc6943ed820fcc5c50f5cbb0~mv2.jpg" },
+      { category: "Food", code: "f3", title: "Fresh from the oven", image: "assets/gallery/f3.jpg", fallback: "https://static.wixstatic.com/media/e9cf4f_191bd95ab8bc4ad2aa331d47328528e6~mv2.webp/v1/fill/w_284,h_186,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/e9cf4f_191bd95ab8bc4ad2aa331d47328528e6~mv2.webp" },
+      { category: "Where we have been", code: "p1", title: "The Meadows", image: "assets/gallery/p1.jpg", fallback: "https://static.wixstatic.com/media/e9cf4f_18c6102c66164272b39fcd4a5d675958~mv2.jpg/v1/crop/x_0,y_271,w_1440,h_898/fill/w_624,h_389,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/284041799_5764117473604961_6597428100485549405_n.jpg" },
+      { category: "Where we have been", code: "p2", title: "Portobello and events", image: "assets/gallery/p2.jpg", fallback: "https://static.wixstatic.com/media/e9cf4f_191bd95ab8bc4ad2aa331d47328528e6~mv2.webp/v1/fill/w_284,h_186,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/e9cf4f_191bd95ab8bc4ad2aa331d47328528e6~mv2.webp" }
     ]
   },
   instagramSetup: [
     "Paste a widget embed into site-data.js under instagram.widgetHtml.",
-    "Keep the fallback posts as a curated backup for privacy blockers and slow networks.",
-    "Use the official Instagram Basic Display API only if you can safely store and refresh an access token server-side."
+    "Upload final gallery files into assets/gallery using names like t1.jpg, f1.jpg and p1.jpg.",
+    "Missing gallery images fall back to temporary existing Wanderers Kneaded images so the layout stays intact."
   ]
 };

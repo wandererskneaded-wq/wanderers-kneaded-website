@@ -6,6 +6,8 @@ window.WK_SITE_DATA = {
     open: "12:00",
     close: "20:00",
     isTradingToday: true,
+    nextService: "Back tomorrow from 12:00, weather permitting",
+    lastUpdated: "Today 09:00",
     mapUrl: "https://www.google.com/maps/search/?api=1&query=Meadow%20Place%20Edinburgh%20EH9%201JZ"
   },
   locations: [
@@ -18,6 +20,14 @@ window.WK_SITE_DATA = {
     { title: "Wedding catering", text: "Relaxed, crowd-pleasing evening food with a polished setup, swift service and pizzas guests remember.", tag: "Celebration" },
     { title: "Corporate events", text: "Reliable catering for staff parties, brand activations, launches and business lunches where timing matters.", tag: "Professional" },
     { title: "Festivals and large events", text: "Multi-unit service for serious footfall, with teams trained to keep quality high and queues moving.", tag: "Scale" }
+  ],
+  eventBenefits: [
+    { title: "Fast service without killing the quality", text: "High-volume wood-fired service designed to keep queues moving while every pizza still feels made with care.", tag: "Speed" },
+    { title: "A proper crowd-pleaser", text: "Sourdough pizza works for weddings, students, staff parties, festivals and late-night food.", tag: "Guests" },
+    { title: "Self-contained mobile setup", text: "We bring the oven, crew, prep, service system and event-ready operation so organisers have less to worry about.", tag: "Setup" },
+    { title: "Looks good on site", text: "A food offer that adds atmosphere, smell, theatre and visual energy as well as dinner.", tag: "Presence" },
+    { title: "Flexible menus", text: "Classic favourites, vegetarian and vegan options, specials and event-specific menus.", tag: "Menus" },
+    { title: "Experienced with real crowds", text: "Built for parks, public events, festivals, private parties and city-centre trading.", tag: "Scale" }
   ],
   partners: [
     { name: "British Street Food Awards", logo: "https://static.wixstatic.com/media/e9cf4f_96660d73e82f40518f4f91151a1e9a5b~mv2.png/v1/fill/w_232,h_164,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/SSFA_Peoples%20Choice.png" },
@@ -69,7 +79,7 @@ window.WK_SITE_DATA = {
   },
   instagramSetup: [
     "Paste a widget embed into site-data.js under instagram.widgetHtml.",
-    "Upload final gallery files into assets/gallery using names like t1.jpg, f1.jpg and p1.jpg.",
-    "Missing gallery images fall back to temporary existing Wanderers Kneaded images so the layout stays intact."
+    "Keep the fallback posts as a curated backup for privacy blockers and slow networks.",
+    "Use the official Instagram Basic Display API only if you can safely store and refresh an access token server-side."
   ]
 };

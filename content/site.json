@@ -5,130 +5,74 @@
     "intro": "Live pitches, opening times and map links. Fast check before you travel.",
     "locations": [
       {
-        "id": "meadows",
-        "name": "The Meadows",
-        "shortName": "Meadows",
-        "address": "Meadow Place, Edinburgh EH9 1JZ",
-        "status": "opening-soon",
-        "statusLabel": "Opens today",
-        "open": "12:00",
-        "close": "20:00",
         "nextService": "Tomorrow, 12:00",
-        "note": "Weather permitting",
+        "statusLabel": "Opens today",
         "lastUpdated": "Today 09:00",
+        "shortName": "Meadows",
+        "open": "12:00",
+        "name": "The Meadows",
         "featured": true,
         "sortOrder": 1,
-        "instagramUrl": "https://www.instagram.com/wandererskneaded/",
-        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Meadow%20Place%20Edinburgh%20EH9%201JZ"
+        "note": "Weather permitting",
+        "status": "opening-soon",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Meadow%20Place%20Edinburgh%20EH9%201JZ",
+        "address": "Meadow Place, Edinburgh EH9 1JZ",
+        "close": "20:00",
+        "id": "meadows",
+        "instagramUrl": "https://www.instagram.com/wandererskneaded/"
       },
       {
-        "id": "portobello",
-        "name": "Portobello",
-        "shortName": "Portobello",
-        "address": "Brunstane Road North, Portobello",
-        "status": "closed",
-        "statusLabel": "Relaunching soon",
-        "open": "",
-        "close": "",
-        "nextService": "Returning soon",
-        "note": "Beach-side service for coastal walks.",
+        "nextService": "",
+        "statusLabel": "Opens at 11am ",
         "lastUpdated": "Today 09:00",
-        "featured": false,
+        "shortName": "Neighbourgood Market",
+        "open": "11:00",
+        "name": "Neighbourgood Market",
+        "featured": true,
         "sortOrder": 2,
-        "instagramUrl": "https://www.instagram.com/wandererskneaded/",
-        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Brunstane%20Road%20North%20Portobello"
+        "note": "",
+        "status": "closed",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Brunstane%20Road%20North%20Portobello",
+        "address": "Portgower Pl, Edinburgh EH4 1HG, United Kingdom",
+        "close": "21:00",
+        "id": "NGM",
+        "instagramUrl": "https://www.instagram.com/wandererskneaded/"
       },
       {
-        "id": "events",
-        "name": "Events across Scotland",
-        "shortName": "Events",
-        "address": "Weddings, venues, offices and festivals",
-        "status": "private-event",
-        "statusLabel": "Taking bookings",
-        "open": "",
-        "close": "",
         "nextService": "Ask for availability",
-        "note": "Multiple vans, tailored menus and crews built for volume.",
+        "statusLabel": "Taking bookings",
         "lastUpdated": "Today 09:00",
+        "shortName": "Events",
+        "open": "",
+        "name": "Events across Scotland",
         "featured": false,
         "sortOrder": 3,
-        "instagramUrl": "https://www.instagram.com/wandererskneaded/",
-        "mapUrl": "#quote"
+        "note": "Multiple vans, tailored menus and crews built for volume.",
+        "status": "private-event",
+        "mapUrl": "#quote",
+        "address": "Weddings, venues, offices and festivals",
+        "close": "",
+        "id": "events",
+        "instagramUrl": "https://www.instagram.com/wandererskneaded/"
       }
     ]
   },
-  "locations": [
+  "proof": [
     {
-      "name": "The Meadows",
-      "address": "Meadow Place, Edinburgh EH9 1JZ",
-      "detail": "Park-side pizza runs, lunch queues and sunny-day slices.",
-      "status": "Regular service"
+      "title": "People's Choice recognition",
+      "text": "National recognition beyond the Edinburgh street-food scene."
     },
     {
-      "name": "Portobello",
-      "address": "Brunstane Road North, Portobello",
-      "detail": "Beach-side service for coastal walks and relaxed evening trade.",
-      "status": "Relaunching soon"
+      "title": "Press-loved street food",
+      "text": "A recognisable Edinburgh pizza name with real street presence."
     },
     {
-      "name": "Events across Scotland",
-      "address": "Weddings, venues, offices and festivals",
-      "detail": "Multiple vans, tailored menus and crews built for volume.",
-      "status": "Taking bookings"
-    }
-  ],
-  "services": [
-    {
-      "title": "Street service",
-      "text": "Live location, fast service and wood-fired pizza from regular Edinburgh spots.",
-      "tag": "Daily"
+      "title": "Public review strength",
+      "text": "Reviews call out the dough, service, team and value."
     },
     {
-      "title": "Wedding catering",
-      "text": "Evening food with theatre, speed and pizzas guests remember.",
-      "tag": "Celebration"
-    },
-    {
-      "title": "Corporate events",
-      "text": "Staff parties, activations, launches and lunches where timing matters.",
-      "tag": "Professional"
-    },
-    {
-      "title": "Festivals and large events",
-      "text": "Multi-unit service for serious footfall and fast-moving queues.",
-      "tag": "Scale"
-    }
-  ],
-  "eventBenefits": [
-    {
-      "title": "Weddings",
-      "text": "Late-night slices, relaxed receptions and outdoor celebrations.",
-      "tag": "Celebrations"
-    },
-    {
-      "title": "Festivals and public events",
-      "text": "Fast queues, strong branding and food that works for mixed crowds.",
-      "tag": "Scale"
-    },
-    {
-      "title": "Corporate events",
-      "text": "Lunches, launches and activations with polished street-food energy.",
-      "tag": "Professional"
-    },
-    {
-      "title": "Private parties",
-      "text": "Birthdays, gardens and graduations where the food becomes the atmosphere.",
-      "tag": "Parties"
-    },
-    {
-      "title": "Self-contained setup",
-      "text": "Oven, crew, prep and service system arrive with us.",
-      "tag": "Setup"
-    },
-    {
-      "title": "Fast service, proper pizza",
-      "text": "Slow-fermented dough and fresh toppings fired fast on site.",
-      "tag": "Service"
+      "title": "Event-ready operation",
+      "text": "Five pizza units total, with three street food units ready to roll."
     }
   ],
   "partners": [
@@ -169,61 +113,11 @@
       "logo": null
     }
   ],
-  "proof": [
-    {
-      "title": "People's Choice recognition",
-      "text": "National recognition beyond the Edinburgh street-food scene."
-    },
-    {
-      "title": "Press-loved street food",
-      "text": "A recognisable Edinburgh pizza name with real street presence."
-    },
-    {
-      "title": "Public review strength",
-      "text": "Reviews call out the dough, service, team and value."
-    },
-    {
-      "title": "Event-ready operation",
-      "text": "Five pizza units total, with three street food units ready to roll."
-    }
-  ],
   "reasons": [
     "Slow-fermented sourdough with bite, lightness and flavour.",
     "Wood fire gives speed, smell and theatre.",
     "Mobile units meet people where the city is already alive.",
     "Classic comfort with playful specials people remember."
-  ],
-  "menu": [
-    {
-      "name": "Margherita",
-      "ingredients": "Tomato sauce, hand-cut fresh fior di latte mozzarella and basil.",
-      "label": "Classic"
-    },
-    {
-      "name": "It's Crust A Matter Of Time",
-      "ingredients": "Italian pepperoni sausage, tomato sauce and fior di latte mozzarella.",
-      "label": "Pepperoni"
-    },
-    {
-      "name": "He's A Real Funghi",
-      "ingredients": "Italian ham, funghi chamo trifolati mushrooms, tomato sauce and mozzarella.",
-      "label": "Savoury"
-    },
-    {
-      "name": "Don't Tell The Country Man",
-      "ingredients": "Pear, gorgonzola and roasted walnuts.",
-      "label": "Rich"
-    },
-    {
-      "name": "To The Moon And Back",
-      "ingredients": "'Nduja spicy sausage, gorgonzola and wild rocket.",
-      "label": "Mild heat"
-    },
-    {
-      "name": "I've Hit Guac Bottom",
-      "ingredients": "Avocado, red onions, cherry tomatoes, mushrooms and chilli flakes. Vegetarian or vegan.",
-      "label": "Plant-led"
-    }
   ],
   "gallery": {
     "items": [
@@ -313,5 +207,111 @@
         "image": "assets/instagram/pepperoni.jpg"
       }
     ]
-  }
+  },
+  "eventBenefits": [
+    {
+      "title": "Weddings",
+      "text": "Late-night slices, relaxed receptions and outdoor celebrations.",
+      "tag": "Celebrations"
+    },
+    {
+      "title": "Festivals and public events",
+      "text": "Fast queues, strong branding and food that works for mixed crowds.",
+      "tag": "Scale"
+    },
+    {
+      "title": "Corporate events",
+      "text": "Lunches, launches and activations with polished street-food energy.",
+      "tag": "Professional"
+    },
+    {
+      "title": "Private parties",
+      "text": "Birthdays, gardens and graduations where the food becomes the atmosphere.",
+      "tag": "Parties"
+    },
+    {
+      "title": "Self-contained setup",
+      "text": "Oven, crew, prep and service system arrive with us.",
+      "tag": "Setup"
+    },
+    {
+      "title": "Fast service, proper pizza",
+      "text": "Slow-fermented dough and fresh toppings fired fast on site.",
+      "tag": "Service"
+    }
+  ],
+  "services": [
+    {
+      "title": "Street service",
+      "text": "Live location, fast service and wood-fired pizza from regular Edinburgh spots.",
+      "tag": "Daily"
+    },
+    {
+      "title": "Wedding catering",
+      "text": "Evening food with theatre, speed and pizzas guests remember.",
+      "tag": "Celebration"
+    },
+    {
+      "title": "Corporate events",
+      "text": "Staff parties, activations, launches and lunches where timing matters.",
+      "tag": "Professional"
+    },
+    {
+      "title": "Festivals and large events",
+      "text": "Multi-unit service for serious footfall and fast-moving queues.",
+      "tag": "Scale"
+    }
+  ],
+  "locations": [
+    {
+      "name": "The Meadows",
+      "address": "Meadow Place, Edinburgh EH9 1JZ",
+      "detail": "Park-side pizza runs, lunch queues and sunny-day slices.",
+      "status": "Regular service"
+    },
+    {
+      "name": "Portobello",
+      "address": "Brunstane Road North, Portobello",
+      "detail": "Beach-side service for coastal walks and relaxed evening trade.",
+      "status": "Relaunching soon"
+    },
+    {
+      "name": "Events across Scotland",
+      "address": "Weddings, venues, offices and festivals",
+      "detail": "Multiple vans, tailored menus and crews built for volume.",
+      "status": "Taking bookings"
+    }
+  ],
+  "menu": [
+    {
+      "name": "Margherita",
+      "ingredients": "Tomato sauce, hand-cut fresh fior di latte mozzarella and basil.",
+      "label": "Classic"
+    },
+    {
+      "name": "It's Crust A Matter Of Time",
+      "ingredients": "Italian pepperoni sausage, tomato sauce and fior di latte mozzarella.",
+      "label": "Pepperoni"
+    },
+    {
+      "name": "He's A Real Funghi",
+      "ingredients": "Italian ham, funghi chamo trifolati mushrooms, tomato sauce and mozzarella.",
+      "label": "Savoury"
+    },
+    {
+      "name": "Don't Tell The Country Man",
+      "ingredients": "Pear, gorgonzola and roasted walnuts.",
+      "label": "Rich"
+    },
+    {
+      "name": "To The Moon And Back",
+      "ingredients": "'Nduja spicy sausage, gorgonzola and wild rocket.",
+      "label": "Mild heat"
+    },
+    {
+      "name": "I've Hit Guac Bottom",
+      "ingredients": "Avocado, red onions, cherry tomatoes, mushrooms and chilli flakes. Vegetarian or vegan.",
+      "label": "Plant-led"
+    }
+  ]
 }

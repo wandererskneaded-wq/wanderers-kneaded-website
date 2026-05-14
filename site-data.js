@@ -1,87 +1,134 @@
 window.WK_SITE_DATA = {
   today: {
-    name: "The Meadows",
-    address: "Meadow Place, Edinburgh EH9 1JZ",
-    note: "Regular Meadow service is the flagship daily update. Change this block whenever the van moves or trading pauses.",
-    open: "12:00",
-    close: "20:00",
-    isTradingToday: true,
-    nextService: "Back tomorrow from 12:00, weather permitting",
+    timezone: "Europe/London",
     lastUpdated: "Today 09:00",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=Meadow%20Place%20Edinburgh%20EH9%201JZ"
+    intro: "Live pitches, opening times and map links. Fast check before you travel.",
+    locations: [
+      {
+        id: "meadows",
+        name: "The Meadows",
+        shortName: "Meadows",
+        address: "Meadow Place, Edinburgh EH9 1JZ",
+        status: "opening-soon",
+        statusLabel: "Opens today",
+        open: "12:00",
+        close: "20:00",
+        nextService: "Tomorrow, 12:00",
+        note: "Weather permitting",
+        lastUpdated: "Today 09:00",
+        featured: true,
+        sortOrder: 1,
+        instagramUrl: "https://www.instagram.com/wandererskneaded/",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=Meadow%20Place%20Edinburgh%20EH9%201JZ"
+      },
+      {
+        id: "portobello",
+        name: "Portobello",
+        shortName: "Portobello",
+        address: "Brunstane Road North, Portobello",
+        status: "closed",
+        statusLabel: "Relaunching soon",
+        open: "",
+        close: "",
+        nextService: "Returning soon",
+        note: "Beach-side service for coastal walks.",
+        lastUpdated: "Today 09:00",
+        featured: false,
+        sortOrder: 2,
+        instagramUrl: "https://www.instagram.com/wandererskneaded/",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=Brunstane%20Road%20North%20Portobello"
+      },
+      {
+        id: "events",
+        name: "Events across Scotland",
+        shortName: "Events",
+        address: "Weddings, venues, offices and festivals",
+        status: "private-event",
+        statusLabel: "Taking bookings",
+        open: "",
+        close: "",
+        nextService: "Ask for availability",
+        note: "Multiple vans, tailored menus and crews built for volume.",
+        lastUpdated: "Today 09:00",
+        featured: false,
+        sortOrder: 3,
+        instagramUrl: "https://www.instagram.com/wandererskneaded/",
+        mapUrl: "#quote"
+      }
+    ]
   },
   locations: [
     {
       name: "The Meadows",
       address: "Meadow Place, Edinburgh EH9 1JZ",
-      detail: "Where it all began: a park-side Edinburgh ritual for lunch, dinner and sunny-day pizza runs.",
+      detail: "Park-side pizza runs, lunch queues and sunny-day slices.",
       status: "Regular service"
     },
     {
       name: "Portobello",
       address: "Brunstane Road North, Portobello",
-      detail: "Beach-side service returning soon, built for coastal walks and relaxed evening trade.",
+      detail: "Beach-side service for coastal walks and relaxed evening trade.",
       status: "Relaunching soon"
     },
     {
       name: "Events across Scotland",
       address: "Weddings, venues, offices and festivals",
-      detail: "Multiple vans, tailored menus and experienced crews for high-volume service.",
+      detail: "Multiple vans, tailored menus and crews built for volume.",
       status: "Taking bookings"
     }
   ],
   services: [
     {
       title: "Street service",
-      text: "Fast, friendly wood-fired pizza from recognisable Edinburgh locations with live opening status and directions.",
+      text: "Live location, fast service and wood-fired pizza from regular Edinburgh spots.",
       tag: "Daily"
     },
     {
       title: "Wedding catering",
-      text: "Relaxed, crowd-pleasing evening food with a polished setup, swift service and pizzas guests remember.",
+      text: "Evening food with theatre, speed and pizzas guests remember.",
       tag: "Celebration"
     },
     {
       title: "Corporate events",
-      text: "Reliable catering for staff parties, brand activations, launches and business lunches where timing matters.",
+      text: "Staff parties, activations, launches and lunches where timing matters.",
       tag: "Professional"
     },
     {
       title: "Festivals and large events",
-      text: "Multi-unit service for serious footfall, with teams trained to keep quality high and queues moving.",
+      text: "Multi-unit service for serious footfall and fast-moving queues.",
       tag: "Scale"
     }
   ],
   eventBenefits: [
     {
-      title: "Fast service without killing the quality",
-      text: "High-volume wood-fired service designed to keep queues moving while every pizza still feels made with care.",
-      tag: "Speed"
+      title: "Weddings",
+      text: "Late-night slices, relaxed receptions and outdoor celebrations.",
+      tag: "Celebrations"
     },
     {
-      title: "A proper crowd-pleaser",
-      text: "Sourdough pizza works for weddings, students, staff parties, festivals and late-night food.",
-      tag: "Guests"
+      title: "Festivals and public events",
+      text: "Fast queues, strong branding and food that works for mixed crowds.",
+      tag: "Scale"
     },
     {
-      title: "Self-contained mobile setup",
-      text: "We bring the oven, crew, prep, service system and event-ready operation so organisers have less to worry about.",
+      title: "Corporate events",
+      text: "Lunches, launches and activations with polished street-food energy.",
+      tag: "Professional"
+    },
+    {
+      title: "Private parties",
+      text: "Birthdays, gardens and graduations where the food becomes the atmosphere.",
+      tag: "Parties"
+    },
+    {
+      title: "Self-contained setup",
+      text: "Oven, crew, prep and service system arrive with us.",
       tag: "Setup"
     },
     {
-      title: "Looks good on site",
-      text: "A food offer that adds atmosphere, smell, theatre and visual energy as well as dinner.",
-      tag: "Presence"
-    },
-    {
-      title: "Flexible menus",
-      text: "Classic favourites, vegetarian and vegan options, specials and event-specific menus.",
-      tag: "Menus"
-    },
-    {
-      title: "Experienced with real crowds",
-      text: "Built for parks, public events, festivals, private parties and city-centre trading.",
-      tag: "Scale"
+      title: "Fast service, proper pizza",
+      text: "Slow-fermented dough and fresh toppings fired fast on site.",
+      tag: "Service"
     }
   ],
   partners: [
@@ -125,26 +172,26 @@ window.WK_SITE_DATA = {
   proof: [
     {
       title: "People's Choice recognition",
-      text: "British Street Food Awards recognition gives the brand national credibility beyond Edinburgh."
+      text: "National recognition beyond the Edinburgh street-food scene."
     },
     {
       title: "Press-loved street food",
-      text: "Local press describe the van as one of Edinburgh's defining street-food pizza names."
+      text: "A recognisable Edinburgh pizza name with real street presence."
     },
     {
       title: "Public review strength",
-      text: "Reviewers repeatedly call out proper Neapolitan-style dough, fast service, friendly teams and good value."
+      text: "Reviews call out the dough, service, team and value."
     },
     {
       title: "Event-ready operation",
-      text: "The business can scale with multiple units, tailored menus and professional event delivery."
+      text: "Five pizza units total, with three street food units ready to roll."
     }
   ],
   reasons: [
-    "Slow fermentation gives the base lightness, structure and flavour before it ever reaches the oven.",
-    "Wood fire creates the speed and theatre that makes street food feel immediate.",
-    "A mobile pizzeria can meet people where the city is already alive: parks, beaches, venues and festivals.",
-    "The menu balances classic comfort with playful toppings, which makes the brand memorable."
+    "Slow-fermented sourdough with bite, lightness and flavour.",
+    "Wood fire gives speed, smell and theatre.",
+    "Mobile units meet people where the city is already alive.",
+    "Classic comfort with playful specials people remember."
   ],
   menu: [
     {
@@ -163,7 +210,7 @@ window.WK_SITE_DATA = {
       label: "Savoury"
     },
     {
-      name: "Dont Tell The Country Man",
+      name: "Don't Tell The Country Man",
       ingredients: "Pear, gorgonzola and roasted walnuts.",
       label: "Rich"
     },
@@ -173,31 +220,32 @@ window.WK_SITE_DATA = {
       label: "Mild heat"
     },
     {
-      name: "Ive Hit Guac Bottom",
+      name: "I've Hit Guac Bottom",
       ingredients: "Avocado, red onions, cherry tomatoes, mushrooms and chilli flakes. Vegetarian or vegan.",
       label: "Plant-led"
     }
   ],
   gallery: {
     items: [
-      { category: "Trailers to rent", code: "t1", title: "Trailer one", image: "assets/gallery/t1.jpg", fallback: "https://static.wixstatic.com/media/e9cf4f_760335b489ba43b496e1bcb25a2e0f3d~mv2.jpg/v1/crop/x_29,y_0,w_1098,h_1445/fill/w_417,h_549,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/18366104149024333.jpg" },
-      { category: "Trailers to rent", code: "t2", title: "Trailer two", image: "assets/gallery/t2.jpg", fallback: "https://static.wixstatic.com/media/e9cf4f_18c6102c66164272b39fcd4a5d675958~mv2.jpg/v1/crop/x_0,y_271,w_1440,h_898/fill/w_624,h_389,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/284041799_5764117473604961_6597428100485549405_n.jpg" },
-      { category: "Trailers to rent", code: "t3", title: "Trailer three", image: "assets/gallery/t3.jpg", fallback: "https://static.wixstatic.com/media/e9cf4f_07e8feea18054f4998226d27956ba966~mv2.jpg/v1/fill/w_114,h_114,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/e9cf4f_07e8feea18054f4998226d27956ba966~mv2.jpg" },
-      { category: "Food", code: "f1", title: "Wood-fired pizza", image: "assets/gallery/f1.jpg", fallback: "https://static.wixstatic.com/media/e9cf4f_4136c70a397f4d228226acfad5478673~mv2.webp/v1/fill/w_322,h_186,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/e9cf4f_4136c70a397f4d228226acfad5478673~mv2.webp" },
-      { category: "Food", code: "f2", title: "Pizza by the slice", image: "assets/gallery/f2.jpg", fallback: "https://static.wixstatic.com/media/e9cf4f_20ed6a40bc6943ed820fcc5c50f5cbb0~mv2.jpg/v1/fill/w_112,h_149,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/e9cf4f_20ed6a40bc6943ed820fcc5c50f5cbb0~mv2.jpg" },
-      { category: "Food", code: "f3", title: "Fresh from the oven", image: "assets/gallery/f3.jpg", fallback: "https://static.wixstatic.com/media/e9cf4f_191bd95ab8bc4ad2aa331d47328528e6~mv2.webp/v1/fill/w_284,h_186,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/e9cf4f_191bd95ab8bc4ad2aa331d47328528e6~mv2.webp" },
-      { category: "Where we have been", code: "p1", title: "The Meadows", image: "assets/gallery/p1.jpg", fallback: "https://static.wixstatic.com/media/e9cf4f_18c6102c66164272b39fcd4a5d675958~mv2.jpg/v1/crop/x_0,y_271,w_1440,h_898/fill/w_624,h_389,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/284041799_5764117473604961_6597428100485549405_n.jpg" },
-      { category: "Where we have been", code: "p2", title: "Portobello and events", image: "assets/gallery/p2.jpg", fallback: "https://static.wixstatic.com/media/e9cf4f_191bd95ab8bc4ad2aa331d47328528e6~mv2.webp/v1/fill/w_284,h_186,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/e9cf4f_191bd95ab8bc4ad2aa331d47328528e6~mv2.webp" }
+      { category: "Street food unit", code: "t1", title: "Evening service at The Meadows", image: "assets/gallery/t1.jpg", fallback: "assets/gallery/t2.jpg" },
+      { category: "Street food unit", code: "t2", title: "Wanderers Kneaded on pitch", image: "assets/gallery/t2.jpg", fallback: "assets/gallery/t1.jpg" },
+      { category: "Food", code: "f1", title: "Margherita on the move", image: "assets/gallery/f1.jpg", fallback: "assets/gallery/f2.jpg" },
+      { category: "Food", code: "f2", title: "Pepperoni fired fresh", image: "assets/gallery/f2.jpg", fallback: "assets/gallery/f1.jpg" },
+      { category: "Food", code: "f3", title: "Plant-led favourite", image: "assets/gallery/f3.jpg", fallback: "assets/gallery/f1.jpg" },
+      { category: "Food", code: "f4", title: "Ham and mushroom classic", image: "assets/gallery/f4.jpg", fallback: "assets/gallery/f2.jpg" },
+      { category: "Food", code: "f5", title: "Pear, walnut and blue cheese", image: "assets/gallery/f5.jpg", fallback: "assets/gallery/f1.jpg" },
+      { category: "Food", code: "f6", title: "Cheese and tomato comfort", image: "assets/gallery/f6.jpg", fallback: "assets/gallery/f2.jpg" },
+      { category: "Food", code: "f7", title: "White base from the oven", image: "assets/gallery/f7.jpg", fallback: "assets/gallery/f1.jpg" }
     ]
   },
   instagram: {
     handle: "@wandererskneaded",
     widgetHtml: "",
-    fallbackText: "Live Instagram feed placeholder. Add an Instagram widget embed here when ready."
-  },
-  instagramSetup: [
-    "Paste a widget embed into site-data.js under instagram.widgetHtml.",
-    "Keep the fallback posts as a curated backup for privacy blockers and slow networks.",
-    "Use the official Instagram Basic Display API only if you can safely store and refresh an access token server-side."
-  ]
+    fallbackText: "Latest services, specials, events and behind-the-scenes fire.",
+    posts: [
+      { label: "Street trade", title: "Follow the van", image: "assets/instagram/street-van.jpg" },
+      { label: "The pizza", title: "Fresh slice energy", image: "assets/instagram/slice.jpg" },
+      { label: "Menu favourite", title: "Pepperoni fired fresh", image: "assets/instagram/pepperoni.jpg" }
+    ]
+  }
 };

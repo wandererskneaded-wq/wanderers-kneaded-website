@@ -1,5 +1,44 @@
-const data = window.WK_SITE_DATA;
+const CMS_STORAGE_KEY = "WK_CMS_DRAFT";
+
+function isPlainObject(value) {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function deepMerge(base, override) {
+  if (Array.isArray(base) || Array.isArray(override)) return override ?? base;
+  const merged = { ...base };
+  Object.entries(override || {}).forEach(([key, value]) => {
+    if (isPlainObject(value) && isPlainObject(base[key])) {
+      merged[key] = deepMerge(base[key], value);
+    } else {
+      merged[key] = value;
+    }
+  });
+  return merged;
+}
+
+function getCmsDraft() {
+  try {
+    return JSON.parse(localStorage.getItem(CMS_STORAGE_KEY) || "null");
+  } catch {
+    return null;
+  }
+}
+
+const DEFAULT_SITE_DATA = window.WK_SITE_DATA || {};
+let data = DEFAULT_SITE_DATA;
 const $ = (selector) => document.querySelector(selector);
+
+async function loadContentData() {
+  try {
+    const response = await fetch(`content/site.json?v=${Date.now()}`, { cache: "no-store" });
+    if (!response.ok) throw new Error(`Content request failed: ${response.status}`);
+    const contentData = await response.json();
+    data = contentData;
+  } catch (error) {
+    console.warn("Using fallback site data.", error);
+  }
+}
 
 function parseTime(value, now = new Date()) {
   const [hours, minutes] = value.split(":").map(Number);
@@ -17,71 +56,187 @@ function formatDuration(ms) {
   return `${minutes}m`;
 }
 
-function getStatus() {
-  const now = new Date();
-  const open = parseTime(data.today.open, now);
-  const close = parseTime(data.today.close, now);
-  const trading = data.today.isTradingToday;
+function getTodayLocations() {
+  if (Array.isArray(data.today.locations) && data.today.locations.length) {
+    return [...data.today.locations].sort((a, b) => (a.sortOrder || 999) - (b.sortOrder || 999));
+  }
 
-  if (!trading) {
+  return [{
+    id: "today",
+    name: data.today.name,
+    shortName: data.today.name,
+    address: data.today.address,
+    status: data.today.isTradingToday ? "opening-soon" : "private-event",
+    statusLabel: data.today.statusOverride || "Opens today",
+    open: data.today.open,
+    close: data.today.close,
+    nextService: data.today.nextService,
+    note: data.today.weatherNote,
+    lastUpdated: data.today.lastUpdated,
+    featured: true,
+    sortOrder: 1,
+    instagramUrl: "https://www.instagram.com/wandererskneaded/",
+    mapUrl: data.today.mapUrl
+  }];
+}
+
+function getLocationStatus(location, now = new Date()) {
+  const hasHours = location.open && location.close;
+  const open = hasHours ? parseTime(location.open, now) : null;
+  const close = hasHours ? parseTime(location.close, now) : null;
+  const baseStatus = location.status || "opening-soon";
+
+  if (baseStatus === "sold-out") {
     return {
-      open: false,
-      label: "Not trading today",
-      timer: "Check Instagram for pop-ups",
-      next: "Paused"
+      state: "sold-out",
+      label: location.statusLabel || "Sold out",
+      headline: "Sold out",
+      timer: location.nextService ? `Back ${location.nextService}` : "Check Instagram",
+      isOpen: false
+    };
+  }
+
+  if (baseStatus === "private-event") {
+    return {
+      state: "private-event",
+      label: location.statusLabel || "Private event",
+      headline: "Private event",
+      timer: location.nextService || "Ask for availability",
+      isOpen: false
+    };
+  }
+
+  if (baseStatus === "weather-watch") {
+    return {
+      state: "weather-watch",
+      label: location.statusLabel || "Weather watch",
+      headline: "Weather watch",
+      timer: location.nextService || location.note || "Check Instagram",
+      isOpen: false
+    };
+  }
+
+  if (!hasHours || baseStatus === "closed") {
+    return {
+      state: "closed",
+      label: location.statusLabel || "Closed today",
+      headline: "Closed today",
+      timer: location.nextService || "Check Instagram",
+      isOpen: false
     };
   }
 
   if (now < open) {
+    const duration = formatDuration(open - now);
     return {
-      open: false,
-      label: "Opens today",
-      timer: `Opens in ${formatDuration(open - now)}`,
-      next: formatDuration(open - now)
+      state: "opening-soon",
+      label: `Opens in ${duration}`,
+      headline: `Opens in ${duration}`,
+      timer: `${location.open} - ${location.close}`,
+      isOpen: false
     };
   }
 
   if (now >= open && now < close) {
+    const duration = formatDuration(close - now);
     return {
-      open: true,
+      state: "open",
       label: "Open now",
-      timer: `Closes in ${formatDuration(close - now)}`,
-      next: formatDuration(close - now)
+      headline: `Open for ${duration} more`,
+      timer: `${location.open} - ${location.close}`,
+      isOpen: true
     };
   }
 
   return {
-    open: false,
+    state: "closed",
     label: "Closed now",
-    timer: "Closed for today",
-    next: "Tomorrow"
+    headline: "Closed for today",
+    timer: location.nextService ? `Back ${location.nextService}` : "Check Instagram",
+    isOpen: false
+  };
+}
+
+function getStatus() {
+  const now = new Date();
+  const locations = getTodayLocations();
+  const featured = locations.find((location) => location.featured) || locations[0];
+  const status = getLocationStatus(featured, now);
+  return {
+    open: status.isOpen,
+    label: status.label,
+    timer: status.headline,
+    next: status.headline,
+    location: featured
   };
 }
 
 function renderLiveStatus() {
   const status = getStatus();
+  const locations = getTodayLocations();
   const time = new Intl.DateTimeFormat("en-GB", {
     hour: "2-digit",
     minute: "2-digit",
-    timeZone: "Europe/London"
+    timeZone: data.today.timezone || "Europe/London"
   }).format(new Date());
+  const primary = status.location;
 
   $("#statusPill").textContent = status.label;
   $("#statusPill").classList.toggle("is-open", status.open);
-  $("#todayLocation").textContent = `${data.today.name} - ${data.today.address}`;
-  $("#todayHours").textContent = `${data.today.open} - ${data.today.close}`;
+  $("#todayLocation").textContent = `${primary.name} - ${primary.address}`;
+  $("#todayHours").textContent = primary.open && primary.close ? `${primary.open} - ${primary.close}` : primary.nextService || "Check updates";
   $("#countdown").textContent = status.next;
   $("#localTime").textContent = time;
-  $("#todayHeadline").textContent = status.open ? `We are at ${data.today.name}` : `Find us at ${data.today.name}`;
-  $("#todayNote").textContent = data.today.note;
-  $("#todayAddress").textContent = data.today.address;
-  $("#todayWindow").textContent = `${data.today.open} - ${data.today.close}`;
-  $("#todayTimer").textContent = status.timer;
-  $("#nextService").textContent = data.today.nextService || "Check Instagram for the next service";
-  $("#todayUpdated").textContent = data.today.lastUpdated || `Today ${time}`;
-  $("#lastUpdated").textContent = `Last updated ${data.today.lastUpdated || time}`;
-  $("#mapLink").href = data.today.mapUrl;
-  $("#todayMapsButton").href = data.today.mapUrl;
+  $("#todayHeadline").textContent = locations.length > 1 ? "Find us today" : `Find us at ${primary.name}`;
+  $("#todayNote").textContent = data.today.intro || "Live pitches, opening times and map links. Fast check before you travel.";
+  $("#todayUpdated").textContent = `Last updated ${data.today.lastUpdated || primary.lastUpdated || `Today ${time}`}`;
+  $("#lastUpdated").textContent = `Last updated ${primary.lastUpdated || data.today.lastUpdated || time}`;
+  $("#mapLink").href = primary.mapUrl || "#today";
+  renderTodayCards(locations);
+}
+
+function setOptionalLink(link, href) {
+  link.href = href || "#today";
+  if (href && href.startsWith("#")) {
+    link.removeAttribute("target");
+    link.removeAttribute("rel");
+  } else {
+    link.target = "_blank";
+    link.rel = "noreferrer";
+  }
+}
+
+function renderTodayCards(locations) {
+  const board = $("#todayLiveGrid");
+  if (!board) return;
+  board.innerHTML = "";
+  const now = new Date();
+
+  locations.forEach((location) => {
+    const status = getLocationStatus(location, now);
+    const mapHref = location.mapUrl || "#today";
+    const mapText = mapHref.startsWith("#") ? "Book event" : "Open map";
+    const item = card(`
+      <div class="open-sign ${status.state}">
+        <span>${status.label}</span>
+      </div>
+      <h3>${location.name}</h3>
+      <p>${location.address}</p>
+      <strong>${status.headline}</strong>
+      <small>Service: ${location.open && location.close ? `${location.open} - ${location.close}` : location.nextService || "Check updates"}</small>
+      <small>Next: ${location.nextService || "Check Instagram"}</small>
+      <small>Note: ${location.note || "Weather permitting"}</small>
+      <div class="today-card-actions">
+        <a class="map-button" href="${mapHref}">${mapText}</a>
+        <a class="insta-button" href="${location.instagramUrl || "https://www.instagram.com/wandererskneaded/"}" target="_blank" rel="noreferrer">Instagram</a>
+      </div>
+    `);
+    item.className = `today-location-card ${status.state}`;
+    const map = item.querySelector(".map-button");
+    if (mapHref.startsWith("#")) map.classList.add("internal-link");
+    setOptionalLink(map, mapHref);
+    board.appendChild(item);
+  });
 }
 
 function card(template) {
@@ -106,16 +261,6 @@ function renderCollections() {
       <span>${item.tag}</span>
       <h3>${item.title}</h3>
       <p>${item.text}</p>
-    `));
-  });
-
-  const locations = $("#locationsStack");
-  data.locations.forEach((item) => {
-    locations.appendChild(card(`
-      <span>${item.status}</span>
-      <h3>${item.name}</h3>
-      <p>${item.address}</p>
-      <small>${item.detail}</small>
     `));
   });
 
@@ -173,13 +318,29 @@ function renderCollections() {
   });
 
   const instagramSlot = $("#instagramLiveSlot");
+  const instagramGrid = $("#instagramGrid");
+  if (instagramGrid && data.instagram.posts) {
+    data.instagram.posts.forEach((post) => {
+      const item = document.createElement("a");
+      item.href = "https://www.instagram.com/wandererskneaded/";
+      item.target = "_blank";
+      item.rel = "noreferrer";
+      item.className = "instagram-tile";
+      item.innerHTML = `
+        <img src="${post.image}" alt="${post.title}" loading="lazy">
+        <span><small>${post.label}</small>${post.title}</span>
+      `;
+      instagramGrid.appendChild(item);
+    });
+  }
+
   if (data.instagram.widgetHtml.trim()) {
     instagramSlot.innerHTML = data.instagram.widgetHtml;
     instagramSlot.classList.add("has-widget");
   } else {
     instagramSlot.innerHTML = `
       <strong>${data.instagram.handle}</strong>
-      <span>${data.instagram.fallbackText} Paste it into <code>site-data.js</code>.</span>
+      <span>${data.instagram.fallbackText}</span>
     `;
   }
 }
@@ -198,7 +359,48 @@ function placeGalleryNearProof() {
 
 function setHeaderState() {
   const header = document.querySelector("[data-elevate]");
-  header.classList.toggle("is-scrolled", window.scrollY > 20);
+  const scrolled = window.scrollY > 20;
+  header.classList.toggle("is-scrolled", scrolled);
+  document.body.classList.toggle("has-scrolled", window.scrollY > 360);
+}
+
+function enableQuoteBrief() {
+  const form = $("#quoteForm");
+  const status = $("#quoteStatus");
+  if (!form) return;
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const fields = new FormData(form);
+    const lines = [
+      "Hi Wanderers Kneaded,",
+      "",
+      "I would like to check availability for an event.",
+      "",
+      `Name: ${fields.get("name") || ""}`,
+      `Phone: ${fields.get("phone") || ""}`,
+      `Email: ${fields.get("email") || ""}`,
+      `Event type: ${fields.get("eventType") || ""}`,
+      `Event date: ${fields.get("eventDate") || "Not confirmed"}`,
+      `Venue / postcode: ${fields.get("location") || ""}`,
+      `Guest numbers: ${fields.get("guests") || "Not sure yet"}`,
+      `Indoor / outdoor: ${fields.get("setting") || ""}`,
+      `Power available: ${fields.get("power") || ""}`,
+      `Service style: ${fields.get("serviceStyle") || ""}`,
+      "",
+      "Notes:",
+      fields.get("message") || "No extra notes yet.",
+      "",
+      "Thanks"
+    ];
+
+    const subject = `Event enquiry - ${fields.get("eventType") || "Wanderers Kneaded"}`;
+    const mailto = `mailto:hello@wandererskneaded.co.uk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+    status.textContent = "Opening your email app with the quote brief ready to send.";
+    window.location.href = mailto;
+  });
 }
 
 function enableReveal() {
@@ -211,11 +413,17 @@ function enableReveal() {
   document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
 }
 
-renderCollections();
-placeGalleryNearProof();
-renderLiveStatus();
-enableReveal();
-setHeaderState();
+async function init() {
+  await loadContentData();
+  renderCollections();
+  placeGalleryNearProof();
+  renderLiveStatus();
+  enableQuoteBrief();
+  enableReveal();
+  setHeaderState();
 
-setInterval(renderLiveStatus, 30000);
-window.addEventListener("scroll", setHeaderState, { passive: true });
+  setInterval(renderLiveStatus, 30000);
+  window.addEventListener("scroll", setHeaderState, { passive: true });
+}
+
+init();

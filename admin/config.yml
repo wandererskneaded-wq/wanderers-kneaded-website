@@ -1,0 +1,142 @@
+backend:
+  name: github
+  repo: wandererskneaded-wq/wanderers-kneaded-website
+  branch: main
+  base_url: https://www.wandererskneaded.co.uk
+  auth_endpoint: api/auth
+  site_domain: www.wandererskneaded.co.uk
+
+local_backend: true
+publish_mode: simple
+
+media_folder: assets/uploads
+public_folder: /assets/uploads
+
+site_url: https://www.wandererskneaded.co.uk
+display_url: https://www.wandererskneaded.co.uk
+logo_url: /assets/brand/wanderers-kneaded-hot-pink-neon.png
+
+collections:
+  - name: site
+    label: Website Content
+    files:
+      - name: site
+        label: Main Website Content
+        file: content/site.json
+        format: json
+        fields:
+          - label: Today Board
+            name: today
+            widget: object
+            fields:
+              - { label: Timezone, name: timezone, widget: string, default: Europe/London }
+              - { label: Last Updated, name: lastUpdated, widget: string, required: false }
+              - { label: Intro Text, name: intro, widget: text, required: false }
+              - label: Locations
+                name: locations
+                widget: list
+                summary: "{{fields.name}} - {{fields.status}}"
+                fields:
+                  - { label: ID, name: id, widget: string }
+                  - { label: Name, name: name, widget: string }
+                  - { label: Short Name, name: shortName, widget: string, required: false }
+                  - { label: Address, name: address, widget: string }
+                  - label: Status
+                    name: status
+                    widget: select
+                    options:
+                      - { label: Open now, value: open }
+                      - { label: Opening soon, value: opening-soon }
+                      - { label: Closed, value: closed }
+                      - { label: Private event / Taking bookings, value: private-event }
+                      - { label: Sold out, value: sold-out }
+                      - { label: Weather watch, value: weather-watch }
+                  - { label: Status Label, name: statusLabel, widget: string, required: false }
+                  - { label: Open Time, name: open, widget: string, required: false, hint: "Use 24-hour time, e.g. 12:00" }
+                  - { label: Close Time, name: close, widget: string, required: false, hint: "Use 24-hour time, e.g. 20:00" }
+                  - { label: Next Service, name: nextService, widget: string, required: false }
+                  - { label: Note, name: note, widget: string, required: false }
+                  - { label: Last Updated, name: lastUpdated, widget: string, required: false }
+                  - { label: Featured, name: featured, widget: boolean, default: false, required: false }
+                  - { label: Sort Order, name: sortOrder, widget: number, default: 1, value_type: int }
+                  - { label: Instagram URL, name: instagramUrl, widget: string, required: false }
+                  - { label: Map URL, name: mapUrl, widget: string, required: false }
+
+          - label: Services
+            name: services
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { label: Tag, name: tag, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Text, name: text, widget: text }
+
+          - label: Event Cards
+            name: eventBenefits
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { label: Tag, name: tag, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Text, name: text, widget: text }
+
+          - label: Partners
+            name: partners
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Logo, name: logo, widget: image, required: false, allow_multiple: false }
+
+          - label: Proof Cards
+            name: proof
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Text, name: text, widget: text }
+
+          - label: Why Pizza Matters
+            name: reasons
+            widget: list
+            field: { label: Reason, name: reason, widget: string }
+
+          - label: Menu Items
+            name: menu
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Name, name: name, widget: string }
+              - { label: Ingredients, name: ingredients, widget: text }
+
+          - label: Gallery
+            name: gallery
+            widget: object
+            fields:
+              - label: Gallery Items
+                name: items
+                widget: list
+                summary: "{{fields.code}} - {{fields.title}}"
+                fields:
+                  - { label: Category, name: category, widget: string }
+                  - { label: Code, name: code, widget: string, hint: "Example: t1, t2, f1, f2" }
+                  - { label: Title, name: title, widget: string }
+                  - { label: Image, name: image, widget: image }
+                  - { label: Fallback Image, name: fallback, widget: image, required: false }
+
+          - label: Instagram
+            name: instagram
+            widget: object
+            fields:
+              - { label: Handle, name: handle, widget: string }
+              - { label: Widget Embed HTML, name: widgetHtml, widget: text, required: false }
+              - { label: Fallback Text, name: fallbackText, widget: text, required: false }
+              - label: Static Tiles
+                name: posts
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: Label, name: label, widget: string }
+                  - { label: Title, name: title, widget: string }
+                  - { label: Image, name: image, widget: image }

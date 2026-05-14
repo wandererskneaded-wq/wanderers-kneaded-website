@@ -2,9 +2,9 @@ backend:
   name: github
   repo: wandererskneaded-wq/wanderers-kneaded-website
   branch: main
-  base_url: https://www.wandererskneaded.co.uk
+  base_url: https://wanderers-kneaded-website.wandererskneaded.workers.dev
   auth_endpoint: api/auth
-  site_domain: www.wandererskneaded.co.uk
+  site_domain: wanderers-kneaded-website.wandererskneaded.workers.dev
 
 local_backend: true
 publish_mode: simple
@@ -12,8 +12,8 @@ publish_mode: simple
 media_folder: assets/uploads
 public_folder: /assets/uploads
 
-site_url: https://www.wandererskneaded.co.uk
-display_url: https://www.wandererskneaded.co.uk
+site_url: https://wanderers-kneaded-website.wandererskneaded.workers.dev
+display_url: https://wanderers-kneaded-website.wandererskneaded.workers.dev
 logo_url: /assets/brand/wanderers-kneaded-hot-pink-neon.png
 
 collections:

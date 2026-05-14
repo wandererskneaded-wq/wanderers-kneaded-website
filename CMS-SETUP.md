@@ -8,8 +8,8 @@ Decap CMS is available at `/admin/` and edits that JSON file through GitHub.
 
 Create a GitHub OAuth App:
 
-- Homepage URL: `https://www.wandererskneaded.co.uk`
-- Authorization callback URL: `https://www.wandererskneaded.co.uk/api/auth/callback`
+- Homepage URL: `https://wanderers-kneaded-website.wandererskneaded.workers.dev`
+- Authorization callback URL: `https://wanderers-kneaded-website.wandererskneaded.workers.dev/api/auth/callback`
 
 Then add these Cloudflare Pages environment variables:
 

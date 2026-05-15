@@ -117,31 +117,55 @@ img {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: 0.18rem;
+  width: fit-content;
+  justify-self: center;
+  padding: 0.28rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(16, 10, 7, 0.32);
+  box-shadow:
+    0 0.8rem 2rem rgba(0, 0, 0, 0.16),
+    inset 0 0 0.9rem rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(14px);
 }
 
 .nav a,
 .header-action {
   text-decoration: none;
   font-size: 0.86rem;
-  padding: 0.55rem 0.8rem;
+  padding: 0.58rem 0.86rem;
   border-radius: 999px;
 }
 
+.nav a {
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 0 0.45rem rgba(0, 0, 0, 0.38);
+  transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
 .nav a:hover {
-  background: rgba(255, 255, 255, 0.16);
+  color: #fff4fc;
+  background: rgba(255, 72, 194, 0.18);
+  box-shadow:
+    0 0 0.45rem rgba(255, 72, 194, 0.24),
+    inset 0 0 0.75rem rgba(255, 244, 252, 0.07);
+  transform: translateY(-0.04rem);
 }
 
 .header-action {
   position: relative;
-  min-width: 6.8rem;
-  padding: 0.72rem 1.05rem;
+  min-width: 9.6rem;
+  padding: 0.78rem 1.45rem;
   overflow: hidden;
   color: #fff4fc;
   font-weight: 900;
   text-align: center;
   background: rgba(19, 13, 17, 0.58);
   border: 1px solid rgba(255, 117, 216, 0.82);
+  letter-spacing: 0;
   box-shadow:
     0 0 0.2rem rgba(255, 244, 252, 0.48),
     0 0 0.7rem rgba(255, 72, 194, 0.42),
@@ -180,6 +204,17 @@ img {
   text-shadow: 0 0 0.45rem rgba(255, 72, 194, 0.34);
 }
 
+.site-header.is-scrolled .nav {
+  border-color: rgba(32, 23, 13, 0.1);
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: inset 0 0 0.9rem rgba(255, 255, 255, 0.38);
+}
+
+.site-header.is-scrolled .nav a {
+  color: rgba(32, 23, 13, 0.78);
+  text-shadow: none;
+}
+
 .hero {
   position: relative;
   min-height: 92vh;
@@ -201,8 +236,8 @@ img {
     linear-gradient(180deg, rgba(14, 10, 8, 0.38) 0 24%, rgba(14, 10, 8, 0.08) 32% 50%, rgba(14, 10, 8, 0.48) 68%, rgba(14, 10, 8, 0.86) 100%),
     linear-gradient(90deg, rgba(14, 10, 8, 0.84) 0 23%, rgba(14, 10, 8, 0.32) 35%, rgba(14, 10, 8, 0.05) 52%, rgba(14, 10, 8, 0.26) 78%, rgba(14, 10, 8, 0.5) 100%),
     url("assets/gallery/why-queue.jpg");
-  background-size: auto, auto, auto, auto, 112% auto;
-  background-position: center, center, center, center, 62% 46%;
+  background-size: auto, auto, auto, auto, 108% auto;
+  background-position: center, center, center, center, calc(50% + 130px) 41%;
   background-repeat: no-repeat;
   transform: scale(1.015);
   animation: slowZoom 18s ease-in-out infinite alternate;
